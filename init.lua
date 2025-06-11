@@ -114,9 +114,25 @@ vim.keymap.set('n', '<leader>dd', function()
   vim.diagnostic.enable(false)
 end, { desc = 'Disable diagnostics' })
 
-vim.keymap.set('n', '<S-t>', function()
+vim.keymap.set('n', '<leader>t', function()
   vim.cmd 'terminal'
 end, { desc = 'Open a terminal' })
+
+vim.keymap.set('n', '<S-t>', function()
+  vim.cmd.vnew()
+  vim.cmd.term()
+  vim.cmd.wincmd 'J'
+  vim.api.nvim_win_set_height(0, 8)
+end)
+
+vim.api.nvim_create_autocmd('TermOpen', {
+  group = vim.api.nvim_create_augroup('custom-term-open', { clear = true }),
+  callback = function()
+    vim.opt.number = false
+    vim.opt.relativenumber = false
+    vim.cmd 'startinsert'
+  end,
+})
 
 -- Don't show the mode, since it's already in the status line
 vim.o.showmode = true
