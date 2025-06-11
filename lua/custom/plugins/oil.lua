@@ -7,9 +7,9 @@ return {
     require('oil').setup {
       columns = {
         'icon',
-        -- 'permissions',
-        -- 'size',
-        -- "mtime",
+        'permissions',
+        'size',
+        -- 'mtime',
       },
       view_options = {
         show_hidden = true,
@@ -17,7 +17,7 @@ return {
       skip_confirm_for_simple_edits = true,
     }
     vim.keymap.set('n', '<leader>e', function()
-      vim.cmd 'Oil --float'
+      vim.cmd 'Oil'
     end, { desc = 'Open file explorer' })
   end,
 }
