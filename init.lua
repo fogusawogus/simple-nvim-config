@@ -117,12 +117,17 @@ vim.keymap.set('n', '<leader>t', function()
   vim.cmd 'terminal'
 end, { desc = 'Open a terminal' })
 
+vim.keymap.set('n', 'j', 'gj')
+vim.keymap.set('n', 'k', 'gk')
+
 vim.keymap.set('n', '<S-t>', function()
   vim.cmd.vnew()
   vim.cmd.term()
   vim.cmd.wincmd 'J'
   vim.api.nvim_win_set_height(0, 8)
 end)
+
+vim.cmd 'set laststatus=3'
 
 vim.api.nvim_create_autocmd('TermOpen', {
   group = vim.api.nvim_create_augroup('custom-term-open', { clear = true }),
@@ -133,8 +138,11 @@ vim.api.nvim_create_autocmd('TermOpen', {
   end,
 })
 
+vim.cmd 'set noswapfile'
+vim.cmd 'set undofile'
+
 -- Don't show the mode, since it's already in the status line
-vim.o.showmode = true
+vim.o.showmode = false
 
 vim.o.shiftwidth = 4
 vim.o.tabstop = 4
@@ -396,6 +404,7 @@ require('lazy').setup({
     event = 'VimEnter',
     dependencies = {
       'nvim-lua/plenary.nvim',
+      'debugloop/telescope-undo.nvim',
       { -- If encountering errors, see telescope-fzf-native README for installation instructions
         'nvim-telescope/telescope-fzf-native.nvim',
 
@@ -450,8 +459,12 @@ require('lazy').setup({
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
+          undo = {},
         },
       }
+
+      require('telescope').load_extension 'undo'
+      vim.keymap.set('n', '<leader>u', '<cmd>Telescope undo<cr>', { desc = 'Undotree' })
 
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
@@ -704,17 +717,23 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        -- clangd = {},
+        clangd = {},
         -- gopls = {},
         -- pyright = {},
-        -- rust_analyzer = {},
+        basedpyright = {},
+        rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
+        ts_ls = {},
+        html = {},
+        cssls = {},
+        emmet_ls = {},
+        cmake = {},
+
         --
 
         lua_ls = {
