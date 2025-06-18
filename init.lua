@@ -106,12 +106,12 @@ vim.o.relativenumber = true
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
 vim.diagnostic.enable(false)
-vim.keymap.set('n', '<leader>de', function()
-  vim.diagnostic.enable(true)
-end, { desc = 'Enable diagnostics' })
-vim.keymap.set('n', '<leader>dd', function()
-  vim.diagnostic.enable(false)
-end, { desc = 'Disable diagnostics' })
+-- vim.keymap.set('n', '<leader>de', function()
+--   vim.diagnostic.enable(true)
+-- end, { desc = 'Enable diagnostics' })
+-- vim.keymap.set('n', '<leader>dd', function()
+--   vim.diagnostic.enable(false)
+-- end, { desc = 'Disable diagnostics' })
 
 vim.keymap.set('n', '<leader>t', function()
   vim.cmd 'terminal'
@@ -461,6 +461,11 @@ require('lazy').setup({
           },
           undo = {},
         },
+        -- pickers = {
+        --   find_files = {
+        --     theme = 'ivy',
+        --   },
+        -- },
       }
 
       require('telescope').load_extension 'undo'
@@ -904,6 +909,16 @@ require('lazy').setup({
         -- By default, you may press `<c-space>` to show the documentation.
         -- Optionally, set `auto_show = true` to show the documentation after a delay.
         documentation = { auto_show = false, auto_show_delay_ms = 500 },
+        -- menu = {
+        --   auto_show = false,
+        -- },
+
+        list = {
+          selection = {
+            preselect = true,
+            auto_insert = false,
+          },
+        },
       },
 
       sources = {
@@ -925,7 +940,7 @@ require('lazy').setup({
       fuzzy = { implementation = 'lua' },
 
       -- Shows a signature help window while you type arguments for a function
-      signature = { enabled = true },
+      signature = { enabled = false },
     },
   },
 
