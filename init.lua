@@ -725,7 +725,17 @@ require('lazy').setup({
         clangd = {},
         -- gopls = {},
         -- pyright = {},
-        basedpyright = {},
+        basedpyright = {
+          settings = {
+            basedpyright = {
+              analysis = {
+                useLibraryCodeForTypes = true,
+                typeCheckingMode = 'standard',
+                diagnosticMode = 'workplace',
+              },
+            },
+          },
+        },
         rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -738,6 +748,7 @@ require('lazy').setup({
         cssls = {},
         emmet_ls = {},
         cmake = {},
+        tinymist = {},
 
         --
 
