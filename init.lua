@@ -461,11 +461,11 @@ require('lazy').setup({
           },
           undo = {},
         },
-        -- pickers = {
-        --   find_files = {
-        --     theme = 'ivy',
-        --   },
-        -- },
+        pickers = {
+          find_files = {
+            theme = 'ivy',
+          },
+        },
       }
 
       require('telescope').load_extension 'undo'
@@ -906,8 +906,6 @@ require('lazy').setup({
         preset = 'default',
         ['<C-l>'] = { 'snippet_forward', 'fallback' },
         ['<C-h>'] = { 'snippet_backward', 'fallback' },
-        ['<C-j>'] = { 'select_next', 'fallback' },
-        ['<C-k>'] = { 'select_prev', 'fallback' },
       },
 
       appearance = {
@@ -919,10 +917,11 @@ require('lazy').setup({
       completion = {
         -- By default, you may press `<c-space>` to show the documentation.
         -- Optionally, set `auto_show = true` to show the documentation after a delay.
-        documentation = { auto_show = false, auto_show_delay_ms = 500 },
-        -- menu = {
-        --   auto_show = false,
-        -- },
+        documentation = { auto_show = false, auto_show_delay_ms = 500, window = { border = 'rounded' } },
+        menu = {
+          auto_show = true,
+          border = 'none',
+        },
 
         list = {
           selection = {
@@ -936,6 +935,11 @@ require('lazy').setup({
         default = { 'lsp', 'path', 'snippets', 'lazydev' },
         providers = {
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+          cmdline = {
+            enabled = function()
+              return vim.fn.getcmdtype() ~= ':' or not vim.fn.getcmdline():match "^[%%0-9,'<>%-]*!"
+            end,
+          },
         },
       },
 
@@ -948,7 +952,7 @@ require('lazy').setup({
       -- the rust implementation via `'prefer_rust_with_warning'`
       --
       -- See :h blink-cmp-config-fuzzy for more information
-      fuzzy = { implementation = 'lua' },
+      fuzzy = { implementation = 'prefer_rust_with_warning' },
 
       -- Shows a signature help window while you type arguments for a function
       signature = { enabled = false },
