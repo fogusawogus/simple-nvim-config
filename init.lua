@@ -922,6 +922,9 @@ require('lazy').setup({
           auto_show = true,
           border = 'none',
         },
+        ghost_text = {
+          enabled = false,
+        },
 
         list = {
           selection = {
@@ -955,7 +958,7 @@ require('lazy').setup({
       fuzzy = { implementation = 'prefer_rust_with_warning' },
 
       -- Shows a signature help window while you type arguments for a function
-      signature = { enabled = false },
+      signature = { enabled = true },
     },
   },
 
