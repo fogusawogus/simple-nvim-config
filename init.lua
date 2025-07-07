@@ -142,7 +142,7 @@ vim.cmd 'set noswapfile'
 vim.cmd 'set undofile'
 
 -- Don't show the mode, since it's already in the status line
-vim.o.showmode = false
+vim.o.showmode = true
 
 vim.o.shiftwidth = 4
 vim.o.tabstop = 4
@@ -1023,6 +1023,9 @@ require('lazy').setup({
   },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    dependencies = {
+      'OXY2DEV/markview.nvim',
+    },
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
