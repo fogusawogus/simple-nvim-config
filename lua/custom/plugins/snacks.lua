@@ -3,6 +3,7 @@ return {
   opts = {
     lazygit = {},
     scratch = {},
+    rename = {},
   },
   keys = {
     {

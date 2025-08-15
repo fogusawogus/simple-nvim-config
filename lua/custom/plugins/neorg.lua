@@ -15,6 +15,7 @@ return {
             default_workspace = 'notes',
           },
         },
+        ['core.export'] = {},
       },
     }
     vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, { pattern = { '*.norg' }, command = 'set conceallevel=3' })
