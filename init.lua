@@ -35,14 +35,14 @@ vim.api.nvim_create_autocmd('User', {
   end,
 })
 
-vim.keymap.set('n', '<leader>t', function()
-  vim.cmd 'terminal'
-end, { desc = 'Open a terminal' })
+-- vim.keymap.set('n', '<leader>t', function()
+--   vim.cmd 'terminal'
+-- end, { desc = 'Open a terminal' })
 
 vim.keymap.set('n', 'j', 'gj')
 vim.keymap.set('n', 'k', 'gk')
 
-vim.keymap.set('n', '<S-t>', function()
+vim.keymap.set('n', '<leader>t', function()
   vim.cmd.vnew()
   vim.cmd.term()
   vim.cmd.wincmd 'J'
