@@ -86,6 +86,7 @@ if vim.fn.has 'wsl' == 1 then
       vim.fn.system('clip.exe', vim.fn.getreg '"')
     end,
   })
+  vim.o.clipboard = ''
 end
 -- Enable break indent
 vim.o.breakindent = true
@@ -798,17 +799,16 @@ require('lazy').setup({
           -- `friendly-snippets` contains a variety of premade snippets.
           --    See the README about individual language/framework/plugin snippets:
           --    https://github.com/rafamadriz/friendly-snippets
-          -- {
-          --   'rafamadriz/friendly-snippets',
-          --   config = function()
-          --     require('luasnip.loaders.from_vscode').lazy_load()
-          --   end,
-          -- },
+          {
+            'rafamadriz/friendly-snippets',
+            config = function()
+              require('luasnip.loaders.from_vscode').lazy_load()
+            end,
+          },
         },
         opts = {},
       },
       'folke/lazydev.nvim',
-      'archie-judd/blink-cmp-words',
     },
     --- @module 'blink.cmp'
     --- @type blink.cmp.Config
@@ -875,53 +875,6 @@ require('lazy').setup({
               return vim.fn.getcmdtype() ~= ':' or not vim.fn.getcmdline():match "^[%%0-9,'<>%-]*!"
             end,
           },
-          -- Use the thesaurus source
-          thesaurus = {
-            name = 'blink-cmp-words',
-            module = 'blink-cmp-words.thesaurus',
-            -- All available options
-            opts = {
-              -- A score offset applied to returned items.
-              -- By default the highest score is 0 (item 1 has a score of -1, item 2 of -2 etc..).
-              score_offset = 0,
-
-              -- Default pointers define the lexical relations listed under each definition,
-              -- see Pointer Symbols below.
-              -- Default is as below ("antonyms", "similar to" and "also see").
-              definition_pointers = { '!', '&', '^' },
-
-              -- The pointers that are considered similar words when using the thesaurus,
-              -- see Pointer Symbols below.
-              -- Default is as below ("similar to", "also see" }
-              similarity_pointers = { '&', '^' },
-
-              -- The depth of similar words to recurse when collecting synonyms. 1 is similar words,
-              -- 2 is similar words of similar words, etc. Increasing this may slow results.
-              similarity_depth = 2,
-            },
-          },
-
-          -- Use the dictionary source
-          dictionary = {
-            name = 'blink-cmp-words',
-            module = 'blink-cmp-words.dictionary',
-            -- All available options
-            opts = {
-              -- The number of characters required to trigger completion.
-              -- Set this higher if completion is slow, 3 is default.
-              dictionary_search_threshold = 3,
-
-              -- See above
-              score_offset = 0,
-
-              -- See above
-              definition_pointers = { '!', '&', '^' },
-            },
-          },
-        },
-        per_filetype = {
-          text = { 'thesaurus', 'dictionary' },
-          typ = { 'thesaurus' },
         },
       },
 
@@ -937,7 +890,7 @@ require('lazy').setup({
       fuzzy = { implementation = 'prefer_rust_with_warning' },
 
       -- Shows a signature help window while you type arguments for a function
-      signature = { enabled = true },
+      signature = { enabled = true, trigger = { enabled = false } },
     },
   },
 
