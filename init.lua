@@ -920,8 +920,8 @@ require('lazy').setup({
           },
         },
         per_filetype = {
-          text = { 'dictionary' },
-          typ = { 'dictionary', 'thesaurus' },
+          text = { 'thesaurus', 'dictionary' },
+          typ = { 'thesaurus' },
         },
       },
 
