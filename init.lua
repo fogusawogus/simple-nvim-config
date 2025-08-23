@@ -851,7 +851,7 @@ require('lazy').setup({
         -- Optionally, set `auto_show = true` to show the documentation after a delay.
         documentation = { auto_show = false, auto_show_delay_ms = 500, window = { border = 'rounded' } },
         menu = {
-          auto_show = false,
+          auto_show = true,
           border = 'none',
         },
         ghost_text = {
