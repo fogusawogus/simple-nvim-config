@@ -6,6 +6,20 @@ vim.g.maplocalleader = ' '
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
+if vim.g.neovide then
+  vim.o.guifont = 'JetBrainsMonoNL Nerd Font:h16'
+  vim.g.neovide_cursor_animation_length = 0
+  vim.g.neovide_scroll_animation_length = 0
+  vim.g.neovide_position_animation_length = 0
+end
+
+if package.config:sub(1, 1) == '\\' then
+  vim.cmd 'set shell=pwsh'
+  vim.cmd 'set shellcmdflag=-command'
+  vim.cmd 'set shellquote="'
+  vim.cmd 'set shellxquote='
+end
+
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
@@ -856,6 +870,11 @@ require('lazy').setup({
         },
         ghost_text = {
           enabled = false,
+        },
+        accept = {
+          auto_brackets = {
+            enabled = false,
+          },
         },
 
         list = {
